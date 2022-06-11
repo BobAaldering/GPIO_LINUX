@@ -1,25 +1,27 @@
-#include <stdio.h>
-
 #include "command_line_parser.h"
-#include "segment_driver_wiringpi.h"
+#include "parsed_arguments_collection.h"
+#include "segment_driver_general.h"
 
 int main(int argc, char* argv[]) {
-    display_configuration_wiringpi_t configuration;
+    command_line_builder_t options_collection;
+    parsed_collection_t parsed_collection;
 
-    initialize_segment_driver_wiringpi(&configuration, 0, 1, 2);
-    display_number(&configuration, 6);
+    segment_driver_general_initialize();
 
-    command_line_builder_t options;
+    initialize_command_line_builder(&options_collection);
+    initialize_parsed_collection(&parsed_collection);
 
-    initialize_command_line_builder(&options);
+    add_option_to_builder(&options_collection, "-d", "--display", "Shows a number on the display.", INT);
+    add_option_to_builder(&options_collection, "-cd", "--countdown", "Counts down till zero.", INT);
+    add_option_to_builder(&options_collection, "-cu", "--countup", "Counts up till nine.", INT);
+    add_option_to_builder(&options_collection, "-h", "--help", "This shows the help description.", HELP);
 
-    add_option_to_builder(&options, "-d", "--display", "Shows a number on the display.");
-    add_option_to_builder(&options, "-c", "--countdown", "Counts down till zero.");
-    add_option_to_builder(&options, "-h", "--help", "This shows the help description.");
+    parse_command_line_arguments(&options_collection, &parsed_collection, argc, argv);
 
-    parse_command_line_arguments(&options, argc, argv);
+    segment_driver_general_arguments(&parsed_collection);
 
-    destruct_command_line_builder(&options);
+    destruct_command_line_builder(&options_collection);
+    destruct_parsed_collection(&parsed_collection);
 
     return 0;
 }

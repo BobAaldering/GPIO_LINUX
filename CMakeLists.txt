@@ -5,12 +5,17 @@ add_executable(LED_DEVICE_DRIVER) # Define a name for your executable.
 
 set(target LED_DEVICE_DRIVER) # Create a name for your target.
 
+set(USE_WIRINGPI ON CACHE BOOL "Variable to indicate using WiringPi for driving the seven segment display.")
+target_compile_definitions(LED_DEVICE_DRIVER PRIVATE WIRINGPI_SETUP ${USE_WIRINGPI})
+
 # Here, you can add the files you want to add to your executable.
 target_sources(${target}
         PRIVATE
         ./main.c # The main file of the project.
         ./src/command_line_parser.c
+        ./src/parsed_arguments_collection.c
         ./src/segment_driver_wiringpi.c
+        ./src/segment_driver_general.c
         )
 
 include_directories(./inc) # Instruct the compiler where to look for the given header files within this project.
@@ -18,7 +23,7 @@ include_directories(./inc) # Instruct the compiler where to look for the given h
 find_library(WIRINGPI_LIBRARIES NAMES wiringPi) # Find the 'WiringPi' package. For CLion, also see: https://youtrack.jetbrains.com/issue/CPP-17322/CLion-doesnt-find-implementations-but-code-compiles-and-executes-fine
 target_link_libraries(LED_DEVICE_DRIVER ${WIRINGPI_LIBRARIES} -lbcm2835) # Link against libraries.
 
-target_compile_features(${target} PRIVATE c_std_99) # We are using the newest language standards, so C23.
+target_compile_features(${target} PRIVATE c_std_11) # We are using the newest language standards, so C23.
 set_target_properties(${target} PROPERTIES C_EXTENSIONS OFF) # Turn off compiler specific language extensions.
 
 # Set the options for GNU-linke compilers:
