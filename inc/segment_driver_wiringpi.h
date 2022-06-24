@@ -11,19 +11,24 @@
 #define PIN_NUMBERS_LATCH (10)
 #define BIT_SIZE (8)
 
-#define DEBOUNCE_TIME (50)
-
-static const uint8_t digit_representation[] = {
-        0b01000000,
-        0b01111001,
-        0b00100100,
-        0b00110000,
-        0b00011001,
-        0b00010010,
-        0b00000010,
-        0b01111000,
-        0b00000000,
-        0b00010000
+// It is possible to show hexadecimal numbers on the segment display.
+static const uint8_t digit_representation_wiringpi[] = {
+        0b01000000, // The digit '0'.
+        0b01111001, // The digit '1'.
+        0b00100100, // The digit '2'.
+        0b00110000, // The digit '3'.
+        0b00011001, // The digit '4'.
+        0b00010010, // The digit '5'.
+        0b00000010, // The digit '6'.
+        0b01111000, // The digit '7'.
+        0b00000000, // The digit '8'.
+        0b00010000, // The digit '9'.
+        0b00001000,
+        0b00000011,
+        0b01000110,
+        0b00100001,
+        0b00000110,
+        0b00001110
 };
 
 extern void wiringpi_initialize_segment_driver(int data_pin, int clock_pin, int latch_pin);

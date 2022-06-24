@@ -5,16 +5,18 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "parsed_arguments_collection.h"
 
+#define HEX_BASE_NUMBER (16)
+
 #define DEFAULT_NUMBER_OF_OPTIONS (10)
 #define DEFAULT_GROWTH_FACTOR_ARGUMENTS (2)
-#define MAXIMUM_HELP_LENGTH (250)
+#define MAXIMUM_HELP_LENGTH (350)
 
 typedef enum supported_types {
     INT,
-    DOUBLE,
     HELP,
     NONE
 } supported_types_t;
@@ -40,5 +42,7 @@ extern void add_option_to_builder(command_line_builder_t* builder, char* short_f
 extern void create_help_description(command_line_builder_t* builder, char* help_buffer, size_t size_help_buffer);
 
 extern void parse_command_line_arguments(command_line_builder_t* builder, parsed_collection_t* collection_to_parse, size_t arguments_count, char** arguments_value);
+
+extern _Bool check_if_hex_command_line_argument(const char* hex_representation);
 
 #endif

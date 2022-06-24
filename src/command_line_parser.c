@@ -69,7 +69,7 @@ void create_help_description(command_line_builder_t *builder, char *help_buffer,
 
 void parse_command_line_arguments(command_line_builder_t *builder, parsed_collection_t *collection_to_parse, size_t arguments_count, char **arguments_value) {
     if (arguments_count <= 1) {
-        printf("Usage: ./[PROGRAM_NAME] [FLAGS - OPTIONS]\n\tUse '-h' of '--help' for application help.\n");
+        printf("Usage: ./[PROGRAM_NAME] [FLAGS - OPTIONS]\n\tUse '-h' or '--help' for application help.\n");
         return;
     }
 
@@ -88,19 +88,14 @@ void parse_command_line_arguments(command_line_builder_t *builder, parsed_collec
                         char* argument_to_parse = *(arguments_value)++;
                         char* end_ptr = NULL;
 
-                        int argument_to_int = strtol(argument_to_parse, &end_ptr, 10);
+                        if (check_if_hex_command_line_argument(argument_to_parse)) {
+                            int argument_to_int = strtol(argument_to_parse, &end_ptr, HEX_BASE_NUMBER); // Important, hex uses an base of 16!
 
-                        if (argument_to_parse != end_ptr)
-                            add_parsed_collection_int(collection_to_parse, builder->options[single_argument].long_flag, argument_to_int);
-                    }
-                    else if (builder->options[single_argument].type_of_option == DOUBLE) {
-                        char* argument_to_parse = *(arguments_value)++;
-                        char* end_ptr = NULL;
-
-                        double argument_to_double = strtod(argument_to_parse, &end_ptr);
-
-                        if (argument_to_parse != end_ptr)
-                            add_parsed_collection_double(collection_to_parse, builder->options[single_argument].long_flag, argument_to_double);
+                            if (argument_to_parse != end_ptr)
+                                add_parsed_collection_int(collection_to_parse, builder->options[single_argument].long_flag, argument_to_int);
+                        }
+                        else
+                            fprintf(stderr, "[ERROR MESSAGE] - Invalid hexadecimal argument!\n");
                     }
                 }
                 else if (builder->options[single_argument].type_of_option == HELP) {
@@ -110,6 +105,7 @@ void parse_command_line_arguments(command_line_builder_t *builder, parsed_collec
                         create_help_description(builder, help_print_buffer, sizeof(help_print_buffer));
 
                         printf("Usage: ./[PROGRAM_NAME] [FLAGS - OPTIONS]\n"
+                               "\tThis program displays hexadecimal numbers on a 'seven segment display', for example the number '0xA'.\n"
                                "%s\n",
                                help_print_buffer);
 
@@ -124,4 +120,11 @@ void parse_command_line_arguments(command_line_builder_t *builder, parsed_collec
         }
     }
     while (arguments_value != end_command_arguments);
+}
+
+_Bool check_if_hex_command_line_argument(const char *hex_representation) {
+    if (strlen(hex_representation) == 3)
+        return ((strstr(hex_representation, "0x") != NULL) && isxdigit(hex_representation[2])) ? true : false;
+    else
+        return false;
 }

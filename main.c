@@ -1,12 +1,12 @@
 #include "command_line_parser.h"
 #include "parsed_arguments_collection.h"
-#include "segment_driver_general.h"
+#include "segment_display_general.h"
 
 int main(int argc, char* argv[]) {
     command_line_builder_t options_collection;
     parsed_collection_t parsed_collection;
 
-    segment_driver_general_initialize();
+    initialize_segment_driver_general();
 
     initialize_command_line_builder(&options_collection);
     initialize_parsed_collection(&parsed_collection);
@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
 
     parse_command_line_arguments(&options_collection, &parsed_collection, argc, argv);
 
-    segment_driver_general_arguments(&parsed_collection);
+    argument_segment_driver_general(&parsed_collection);
 
     destruct_command_line_builder(&options_collection);
     destruct_parsed_collection(&parsed_collection);

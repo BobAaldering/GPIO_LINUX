@@ -1,12 +1,12 @@
-#include "segment_driver_general.h"
+#include "segment_display_general.h"
 
-void segment_driver_general_initialize() {
+void initialize_segment_driver_general() {
 #ifdef WIRINGPI_SETUP
     wiringpi_initialize_segment_driver(0, 1, 2);
 #endif
 }
 
-void segment_driver_general_arguments(parsed_collection_t *collection) {
+void argument_segment_driver_general(parsed_collection_t *collection) {
     if (collection == NULL)
         return;
 
@@ -18,7 +18,7 @@ void segment_driver_general_arguments(parsed_collection_t *collection) {
 #endif
         }
         else if (strcmp(collection->parsed_arguments_collection[single_parsed_option].long_flag, "--countup") == 0) {
-            // Count down to zero, start with the number passed as argument.
+            // Count up till nine, start with the number passed as argument.
 #ifdef WIRINGPI_SETUP
             int start_number = *(int* ) collection->parsed_arguments_collection[single_parsed_option].argument;
 
@@ -29,7 +29,15 @@ void segment_driver_general_arguments(parsed_collection_t *collection) {
 #endif
         }
         else if (strcmp(collection->parsed_arguments_collection[single_parsed_option].long_flag, "--countdown") == 0) {
-            // Count up to nine, start with the number passed as argument.
+            // Count down to zero, start with the number passed as argument.
+#ifdef WIRINGPI_SETUP
+            int start_number = *(int* ) collection->parsed_arguments_collection[single_parsed_option].argument;
+
+            for (int i = start_number; i >= 0; i--) {
+                wiringpi_display_number_segment_driver(i);
+                delay(1000);
+            }
+#endif
         }
     }
 }

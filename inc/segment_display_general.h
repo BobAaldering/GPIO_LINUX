@@ -6,7 +6,7 @@
 #include "parsed_arguments_collection.h"
 #include "segment_driver_wiringpi.h"
 
-extern void segment_driver_general_initialize();
-extern void segment_driver_general_arguments(parsed_collection_t* collection);
+extern void initialize_segment_driver_general();
+extern void argument_segment_driver_general(parsed_collection_t* collection);
 
 #endif

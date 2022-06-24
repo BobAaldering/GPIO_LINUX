@@ -7,7 +7,5 @@ void wiringpi_initialize_segment_driver(int data_pin, int clock_pin, int latch_p
 
 void wiringpi_display_number_segment_driver(int digit) {
     for (int bit_number = 0; bit_number < BIT_SIZE; bit_number++)
-        digitalWrite(MIN_PIN_NUMBER + bit_number, digit_representation[digit] & (1 << bit_number));
-
-    //delay(DEBOUNCE_TIME);
+        digitalWrite(MIN_PIN_NUMBER + bit_number, digit_representation_wiringpi[digit] & (1 << bit_number));
 }
