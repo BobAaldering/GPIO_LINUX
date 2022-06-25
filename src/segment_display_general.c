@@ -34,3 +34,7 @@ void argument_segment_driver_general(parsed_collection_t *collection) {
         }
     }
 }
+
+void de_initialize_segment_driver_general() {
+    shift_register_close();
+}

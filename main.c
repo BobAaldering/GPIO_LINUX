@@ -25,5 +25,7 @@ int main(int argc, char* argv[]) {
     destruct_command_line_builder(&options_collection);
     destruct_parsed_collection(&parsed_collection);
 
+    de_initialize_segment_driver_general();
+
     return 0;
 }

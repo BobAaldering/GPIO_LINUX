@@ -8,5 +8,6 @@
 
 extern void initialize_segment_driver_general();
 extern void argument_segment_driver_general(parsed_collection_t* collection);
+extern void de_initialize_segment_driver_general();
 
 #endif
