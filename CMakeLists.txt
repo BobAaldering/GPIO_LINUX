@@ -5,8 +5,8 @@ add_executable(GPIO_HEX_DRIVER) # Define a name for your executable.
 
 set(target GPIO_HEX_DRIVER) # Create a name for your target.
 
-#set(USE_WIRINGPI ON CACHE BOOL "Variable to indicate using WiringPi for driving the seven segment display.")
-#target_compile_definitions(GPIO_HEX_DRIVER PRIVATE WIRINGPI_SETUP ${USE_WIRINGPI})
+set(USE_WIRINGPI ON CACHE BOOL "Variable to indicate using WiringPi for driving the seven segment display.")
+target_compile_definitions(GPIO_HEX_DRIVER PRIVATE WIRINGPI_SETUP ${USE_WIRINGPI})
 
 # Here, you can add the files you want to add to your executable.
 target_sources(${target}
@@ -14,7 +14,6 @@ target_sources(${target}
         ./main.c # The main file of the project.
         ./src/command_line_parser.c
         ./src/parsed_arguments_collection.c
-        ./src/segment_driver_wiringpi.c
         ./src/segment_display_general.c
         ./src/gpio_controller.c
         )
