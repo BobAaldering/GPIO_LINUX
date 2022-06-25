@@ -2,7 +2,17 @@
 #include "parsed_arguments_collection.h"
 #include "segment_display_general.h"
 
+#include "gpio_controller.h"
+
 int main(int argc, char* argv[]) {
+    shift_register_initialize();
+
+    shift_register_set_outputs();
+
+    shift_register_write_byte(0x2);
+
+    return 0;
+
     command_line_builder_t options_collection;
     parsed_collection_t parsed_collection;
 
