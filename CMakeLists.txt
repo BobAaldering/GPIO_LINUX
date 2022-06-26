@@ -26,6 +26,10 @@ target_link_libraries(GPIO_HEX_DRIVER ${WIRINGPI_LIBRARIES} -lbcm2835) # Link ag
 target_compile_features(${target} PRIVATE c_std_11) # We are using the C11 language standards.
 set_target_properties(${target} PROPERTIES C_EXTENSIONS OFF) # Turn off compiler specific language extensions.
 
+add_compile_definitions(${target} PRIVATE
+        $<$<C_COMPILER_ID:GNU,Clang>:_GNU_SOURCE>
+        )
+
 # Set the options for GNU-linke compilers:
 target_compile_options(${target} PRIVATE
         # Set all warnings for all the build types.

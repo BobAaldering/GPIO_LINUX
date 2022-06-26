@@ -1,6 +1,7 @@
 #ifndef LED_DEVICE_DRIVER_SEGMENT_SHOWER_H
 #define LED_DEVICE_DRIVER_SEGMENT_SHOWER_H
 
+#include <errno.h>
 #include <string.h>
 
 #include "parsed_arguments_collection.h"

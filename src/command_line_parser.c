@@ -69,7 +69,7 @@ void create_help_description(command_line_builder_t *builder, char *help_buffer,
 
 void parse_command_line_arguments(command_line_builder_t *builder, parsed_collection_t *collection_to_parse, size_t arguments_count, char **arguments_value) {
     if (arguments_count <= 1) {
-        printf("Usage: ./[PROGRAM_NAME] [FLAGS - OPTIONS]\n\tUse '-h' or '--help' for application help.\n");
+        printf("Usage: ./%s [FLAGS - OPTIONS]\n\tUse '-h' or '--help' for application help.\n", program_invocation_short_name);
         return;
     }
 
@@ -110,9 +110,10 @@ void parse_command_line_arguments(command_line_builder_t *builder, parsed_collec
                         char help_print_buffer[MAXIMUM_HELP_LENGTH];
                         create_help_description(builder, help_print_buffer, sizeof(help_print_buffer));
 
-                        printf("Usage: ./[PROGRAM_NAME] [FLAGS - OPTIONS]\n"
+                        printf("Usage: ./%s [FLAGS - OPTIONS]\n"
                                "\tThis program displays hexadecimal numbers on a 'seven segment display', for example the number '0xA'.\n"
                                "%s\n",
+                               program_invocation_short_name,
                                help_print_buffer);
 
                         has_shown_help = true;
