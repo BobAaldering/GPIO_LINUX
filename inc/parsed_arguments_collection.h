@@ -23,7 +23,6 @@ extern void resize_parsed_collection(parsed_collection_t* collection);
 extern void destruct_parsed_collection(parsed_collection_t* collection);
 
 extern void add_parsed_collection_int(parsed_collection_t* collection, char* long_flag, int argument_value);
-extern void add_parsed_collection_double(parsed_collection_t* collection, char* long_flag, double argument_value);
 extern void add_parsed_collection_none(parsed_collection_t* collection, char* long_flag);
 
 #endif

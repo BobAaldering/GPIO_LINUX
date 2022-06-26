@@ -88,14 +88,20 @@ void parse_command_line_arguments(command_line_builder_t *builder, parsed_collec
                         char* argument_to_parse = *(arguments_value)++;
                         char* end_ptr = NULL;
 
-                        if (check_if_hex_command_line_argument(argument_to_parse)) {
-                            int argument_to_int = strtol(argument_to_parse, &end_ptr, HEX_BASE_NUMBER); // Important, hex uses an base of 16!
+                        if (argument_to_parse != NULL) {
+                            if (check_command_line_argument(argument_to_parse)) {
+                                int argument_to_int = strtol(argument_to_parse, &end_ptr, HEX_BASE_NUMBER); // Important, hex uses a base of 16!
 
-                            if (argument_to_parse != end_ptr)
-                                add_parsed_collection_int(collection_to_parse, builder->options[single_argument].long_flag, argument_to_int);
+                                if (argument_to_parse != end_ptr)
+                                    add_parsed_collection_int(collection_to_parse, builder->options[single_argument].long_flag, argument_to_int);
+                            }
+                            else
+                                printf("[ERROR MESSAGE - PARSING ARGUMENTS] - Invalid argument for option: '%s', with value '%s'!\n", builder->options[single_argument].long_flag, argument_to_parse);
                         }
-                        else
-                            fprintf(stderr, "[ERROR MESSAGE] - Invalid hexadecimal argument!\n");
+                        else {
+                            printf("[ERROR MESSAGE - PARSING ARGUMENTS] - No argument provided by option '%s'!\n", builder->options[single_argument].long_flag);
+                            arguments_value = end_command_arguments;
+                        }
                     }
                 }
                 else if (builder->options[single_argument].type_of_option == HELP) {
@@ -122,9 +128,20 @@ void parse_command_line_arguments(command_line_builder_t *builder, parsed_collec
     while (arguments_value != end_command_arguments);
 }
 
-_Bool check_if_hex_command_line_argument(const char *hex_representation) {
-    if (strlen(hex_representation) == 3)
-        return ((strstr(hex_representation, "0x") != NULL) && isxdigit(hex_representation[2])) ? true : false;
-    else
-        return false;
+_Bool check_command_line_argument(char *argument_value) {
+    _Bool is_flag = (strlen(argument_value) == 2 && argument_value[0] == '-' && argument_value[1] != '-') ||
+                      (strlen(argument_value) >= 4 && argument_value[0] == '-' && argument_value[1] == '-');
+
+    _Bool check_hex_digit = false;
+
+    if (!is_flag && strstr(argument_value, "0x") != NULL && strlen(argument_value) >= 3) {
+        char* only_hex_digits = strchr(argument_value, 'x') + 1;
+
+        while (*only_hex_digits != '\0') {
+            isxdigit(*only_hex_digits) ? (check_hex_digit = true) : (check_hex_digit = false);
+            only_hex_digits++;
+        }
+    }
+
+    return check_hex_digit;
 }

@@ -29,6 +29,11 @@ void destruct_parsed_collection(parsed_collection_t *collection) {
     if (collection == NULL)
         return;
 
+    for (size_t every_collection_item = 0; every_collection_item < collection->number_of_parsed_arguments; every_collection_item++) {
+        if (collection->parsed_arguments_collection[every_collection_item].argument != NULL)
+            free(collection->parsed_arguments_collection[every_collection_item].argument);
+    }
+
     free(collection->parsed_arguments_collection);
 
     collection->parsed_arguments_collection = NULL;
@@ -40,23 +45,16 @@ void add_parsed_collection_int(parsed_collection_t *collection, char *long_flag,
     if (collection == NULL)
         return;
 
-    collection->parsed_arguments_collection[collection->number_of_parsed_arguments].long_flag = long_flag;
-    collection->parsed_arguments_collection[collection->number_of_parsed_arguments].argument = (int* ) &argument_value;
+    int* value_ptr = (int* ) malloc(sizeof(int));
 
-    collection->number_of_parsed_arguments++;
+    if (value_ptr) {
+        *value_ptr = argument_value;
 
-    if (collection->number_of_parsed_arguments >= collection->size_of_collection)
-        resize_parsed_collection(collection);
-}
+        collection->parsed_arguments_collection[collection->number_of_parsed_arguments].long_flag = long_flag;
+        collection->parsed_arguments_collection[collection->number_of_parsed_arguments].argument = value_ptr;
 
-void add_parsed_collection_double(parsed_collection_t *collection, char *long_flag, double argument_value) {
-    if (collection == NULL)
-        return;
-
-    collection->parsed_arguments_collection[collection->number_of_parsed_arguments].long_flag = long_flag;
-    collection->parsed_arguments_collection[collection->number_of_parsed_arguments].argument = (double* ) &argument_value;
-
-    collection->number_of_parsed_arguments++;
+        collection->number_of_parsed_arguments++;
+    }
 
     if (collection->number_of_parsed_arguments >= collection->size_of_collection)
         resize_parsed_collection(collection);

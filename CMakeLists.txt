@@ -23,7 +23,7 @@ include_directories(./inc) # Instruct the compiler where to look for the given h
 find_library(WIRINGPI_LIBRARIES NAMES wiringPi) # Find the 'WiringPi' package. For CLion, also see: https://youtrack.jetbrains.com/issue/CPP-17322/CLion-doesnt-find-implementations-but-code-compiles-and-executes-fine
 target_link_libraries(GPIO_HEX_DRIVER ${WIRINGPI_LIBRARIES} -lbcm2835) # Link against libraries.
 
-target_compile_features(${target} PRIVATE c_std_11) # We are using the newest language standards, so C23.
+target_compile_features(${target} PRIVATE c_std_11) # We are using the C11 language standards.
 set_target_properties(${target} PROPERTIES C_EXTENSIONS OFF) # Turn off compiler specific language extensions.
 
 # Set the options for GNU-linke compilers:
@@ -39,7 +39,7 @@ target_compile_options(${target} PRIVATE
         )
 
 # Enable the 'Address Sanitizer'.
-option(USE_ASAN "Use address sanitizer if available" OFF) # Fancy message. It shows how to turn of the 'Address Sanitizer'.
+option(USE_ASAN "Use address sanitizer if available" ON) # Fancy message. It shows how to turn of the 'Address Sanitizer'. It might happen that you have to delete the file '/etc/ld.so.preload'.
 
 # Try to find the path of your 'Address Sanitizer'.
 execute_process(COMMAND "${CMAKE_C_COMPILER}" -print-file-name=libasan.so

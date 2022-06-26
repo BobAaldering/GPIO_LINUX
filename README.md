@@ -4,9 +4,11 @@
 
 This project contains the GPIO command where a seven segment display is controlled with a Raspberry Pi. xTwo different libraries are used, each of which implements GPIO. The first library is `WiringPi`, and was required to be user. The second library is `BCM2835`. I chose this one to use in a more generic way for the Raspberry Pi. The program can be compiled using `CMake`, an instruction is given below.
 Now follows an overview of the various program functionalities that are supported, and to which the seven segment display shows numbers.
-- The option `--display` or `-d`. This will display a hexadecimal number between `0x0` and `0xF`. You can use it as `./GPIO_HEX_DRIVER --display 0xA` or `./GPIO_HEX_DRIVER -d 0xA`.
-- The `--countup` or `-cu` option. This option counts from the number as argument to `0xF`. You can use it as `./GPIO_HEX_DRIVER --countup 0xA` or `./GPIO_HEX_DRIVER -cu 0xA`.
-- The `--countdown` or `-cd` option. This option counts from the number as argument to `0x0`. You can use it as `./GPIO_HEX_DRIVER --countdown 0xA` or `./GPIO_HEX_DRIVER -cd 0xA`.
+- The `--display` or `-d` option. This will display a hexadecimal number between `0x0` and `0xF`. You can use it as `./GPIO_HEX_DRIVER --display 0xA` or `./GPIO_HEX_DRIVER -d 0xA`.
+- The `--countup` or `-u` option. This option counts from the number as argument to `0xF`. You can use it as `./GPIO_HEX_DRIVER --countup 0xA` or `./GPIO_HEX_DRIVER -u 0xA`.
+- The `--countdown` or `-l` option. This option counts from the number as argument to `0x0`. You can use it as `./GPIO_HEX_DRIVER --countdown 0xA` or `./GPIO_HEX_DRIVER -l 0xA`.
+- The `--wait` or `-w` option. This option is used in combination with the `--countup` and `--countdown` options, to specify a custom wait time while counting. You can use it as `./GPIO_HEX_DRIVER --countdown 0xA --wait 0xFF` or `./GPIO_HEX_DRIVER -l 0xA -w 0xFF`.
+- The `--help` or `-h` option. This shows the application help, and explains all the options possible to control the seven segment display with hexadecimal numbers.
 
 ## Build and execute
 

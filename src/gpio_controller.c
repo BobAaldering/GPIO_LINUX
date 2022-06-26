@@ -8,7 +8,7 @@ void shift_register_write_pin(int8_t pin_number, _Bool is_output) {
 #endif
 }
 
-void shift_register_delay(int32_t wait_time) {
+void shift_register_delay(size_t wait_time) {
 #ifdef WIRINGPI_SETUP
     delay(wait_time);
 #else
@@ -16,7 +16,7 @@ void shift_register_delay(int32_t wait_time) {
 #endif
 }
 
-void shift_register_delay_ms(int32_t wait_time) {
+void shift_register_delay_ms(size_t wait_time) {
 #ifdef WIRINGPI_SETUP
     delayMicroseconds(wait_time);
 #else

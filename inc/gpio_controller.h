@@ -46,8 +46,8 @@ static const uint8_t digit_representation_seven_segment[] = {
 };
 
 extern void shift_register_write_pin(int8_t pin_number, _Bool is_output);
-extern void shift_register_delay(int32_t wait_time);
-extern void shift_register_delay_ms(int32_t wait_time);
+extern void shift_register_delay(size_t wait_time);
+extern void shift_register_delay_ms(size_t wait_time);
 extern void shift_register_pin_as_output(int8_t pin_number);
 
 extern void shift_register_initialize();
