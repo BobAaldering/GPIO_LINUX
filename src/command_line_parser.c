@@ -60,7 +60,7 @@ void create_help_description(command_line_builder_t *builder, char *help_buffer,
 
     for (size_t i = 0; i < builder->number_of_options; i++) {
         string_length += snprintf(help_buffer + string_length, size_help_buffer,
-                                  "\t<%s, %s> - %s\n",
+                                  "<%s, %s> - %s\n\t\t",
                                   builder->options[i].short_flag,
                                   builder->options[i].long_flag,
                                   builder->options[i].help_description);
@@ -69,7 +69,12 @@ void create_help_description(command_line_builder_t *builder, char *help_buffer,
 
 void parse_command_line_arguments(command_line_builder_t *builder, parsed_collection_t *collection_to_parse, size_t arguments_count, char **arguments_value) {
     if (arguments_count <= 1) {
-        printf("Usage: ./%s [FLAGS - OPTIONS]\n\tUse '-h' or '--help' for application help.\n", program_invocation_short_name);
+        printf("[GENERAL INFORMATION '%s']\n\t"
+               "Usage: ./%s [FLAGS - OPTIONS]\n\t\t"
+               "Use '-h' or '--help' for application help.\n",
+               program_invocation_short_name,
+               program_invocation_short_name);
+
         return;
     }
 
@@ -96,10 +101,10 @@ void parse_command_line_arguments(command_line_builder_t *builder, parsed_collec
                                     add_parsed_collection_int(collection_to_parse, builder->options[single_argument].long_flag, argument_to_int);
                             }
                             else
-                                printf("[ERROR MESSAGE - PARSING ARGUMENTS] - Invalid argument for option: '%s', with value '%s'!\n", builder->options[single_argument].long_flag, argument_to_parse);
+                                printf("[ERROR MESSAGE '%s']\n\t - PARSING ARGUMENTS - Invalid argument for option: '%s', with value '%s'!\n", program_invocation_short_name, builder->options[single_argument].long_flag, argument_to_parse);
                         }
                         else {
-                            printf("[ERROR MESSAGE - PARSING ARGUMENTS] - No argument provided by option '%s'!\n", builder->options[single_argument].long_flag);
+                            printf("[ERROR MESSAGE '%s']\n\t - PARSING ARGUMENTS - No argument provided by option '%s'!\n", program_invocation_short_name, builder->options[single_argument].long_flag);
                             arguments_value = end_command_arguments;
                         }
                     }
@@ -110,9 +115,11 @@ void parse_command_line_arguments(command_line_builder_t *builder, parsed_collec
                         char help_print_buffer[MAXIMUM_HELP_LENGTH];
                         create_help_description(builder, help_print_buffer, sizeof(help_print_buffer));
 
-                        printf("Usage: ./%s [FLAGS - OPTIONS]\n"
-                               "\tThis program displays hexadecimal numbers on a 'seven segment display', for example the number '0xA'.\n"
+                        printf("[GENERAL INFORMATION '%s']\n\t"
+                                "Usage: ./%s [FLAGS - OPTIONS]\n\t\t"
+                               "This program displays hexadecimal numbers on a 'seven segment display', for example the number '0xA'.\n\t\t"
                                "%s\n",
+                               program_invocation_short_name,
                                program_invocation_short_name,
                                help_print_buffer);
 

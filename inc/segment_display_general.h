@@ -9,6 +9,8 @@
 
 #define DEFAULT_DELAY_TIME (1000)
 
+#define SHOWED_OPTION_BUFFER_LENGTH (50)
+
 typedef struct argument_existence_pair {
     _Bool has_argument;
     size_t number_in_collection;

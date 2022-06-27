@@ -72,7 +72,6 @@ void shift_register_write_bit(_Bool bit_value) {
 }
 
 void shift_register_write_byte(int specific_digit) {
-    (void) specific_digit;
     for (int bit_number = 0; bit_number < BIT_SIZE; bit_number++) {
         shift_register_write_bit(digit_representation_seven_segment[specific_digit] & (1 << bit_number));
         shift_register_delay_ms(1);
