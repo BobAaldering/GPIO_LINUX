@@ -103,7 +103,7 @@ void argument_segment_driver_general(parsed_collection_t *collection, has_parsed
         printf("[ERROR MESSAGE '%s']\n\t - WAIT ARGUMENT - Only the '--wait' option is provided without the '--countup' of '--countdown' options!\n", program_invocation_short_name);
 
     printf("\n[GENERAL INFORMATION '%s']\n\t"
-           "- QUITTING - Showed your specified option '%s' on the seven segment display! Call the program again to show other options.\n",
+           " - QUITTING - Showed your specified option '%s' on the seven segment display! Call the program again to show other options.\n",
            program_invocation_short_name,
            showed_option);
 }
