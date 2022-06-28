@@ -5,8 +5,13 @@ add_executable(GPIO_HEX_DISPLAY) # Define a name for your executable.
 
 set(target GPIO_HEX_DISPLAY) # Create a name for your target.
 
-set(USE_WIRINGPI ON CACHE BOOL "Variable to indicate using WiringPi for driving the seven segment display.")
-target_compile_definitions(GPIO_HEX_DISPLAY PRIVATE WIRINGPI_SETUP ${USE_WIRINGPI})
+set(USE_WIRINGPI OFF CACHE BOOL "Variable to indicate using WiringPi for driving the seven segment display.")
+
+if (${USE_WIRINGPI})
+    message("Using the WiringPi GPIO configuration")
+    message("To disable this set USE_WIRINGPI to OFF.")
+    target_compile_definitions(GPIO_HEX_DISPLAY PRIVATE WIRINGPI_SETUP ${USE_WIRINGPI})
+endif()
 
 # Here, you can add the files you want to add to your executable.
 target_sources(${target}

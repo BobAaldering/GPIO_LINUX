@@ -28,7 +28,6 @@ int main(int argc, char* argv[]) {
         .delay_option = {.has_argument = false, .number_in_collection = 0}
     };
 
-    initialize_segment_display_general(); // Initialize the seven segment display, based on its configuration passed as an argument in CMake.
 
     initialize_command_line_builder(&options_collection); // Initialize the builder for command line arguments.
     initialize_parsed_collection(&parsed_collection); // Initialize the parsed collection for command line arguments.
@@ -41,6 +40,8 @@ int main(int argc, char* argv[]) {
     add_option_to_builder(&options_collection, "-h", "--help", "This shows this help description.", HELP); // Option for showing the program help functionality.
 
     parse_command_line_arguments(&options_collection, &parsed_collection, argc, argv); // Parse all the command line argument of 'argc' and 'argv'.
+
+    initialize_segment_display_general(); // Initialize the seven segment display, based on its configuration passed as an argument in CMake.
 
     argument_segment_display_general(&parsed_collection, &existing_arguments); // Display the information on the seven segment display.
 

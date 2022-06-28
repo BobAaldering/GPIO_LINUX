@@ -89,7 +89,7 @@ void parse_command_line_arguments(command_line_builder_t *builder, parsed_collec
         // Show the basic usage of the program.
         printf("[GENERAL INFORMATION '%s']\n\t"
                "Usage: ./%s [FLAGS - OPTIONS]\n\t\t"
-               "Use '-h' or '--help' for application help.\n",
+               "Use '-h' or '--help' for application help.\n\n",
                program_invocation_short_name,
                program_invocation_short_name);
 
@@ -128,10 +128,10 @@ void parse_command_line_arguments(command_line_builder_t *builder, parsed_collec
                                     add_parsed_collection_int(collection_to_parse, builder->options[single_argument].long_flag, argument_to_int); // Add the parsed argument to its corresponding collection.
                             }
                             else
-                                printf("[ERROR MESSAGE '%s']\n\t - PARSING ARGUMENTS - Invalid argument for option: '%s', with value '%s'!\n", program_invocation_short_name, builder->options[single_argument].long_flag, argument_to_parse); // An error has happened, show it to the user of the program.
+                                printf("[ERROR MESSAGE '%s']\n\t - PARSING ARGUMENTS - Invalid argument for option: '%s', with value '%s'!\n\n", program_invocation_short_name, builder->options[single_argument].long_flag, argument_to_parse); // An error has happened, show it to the user of the program.
                         }
                         else {
-                            printf("[ERROR MESSAGE '%s']\n\t - PARSING ARGUMENTS - No argument provided by option '%s'!\n", program_invocation_short_name, builder->options[single_argument].long_flag); // An error has happened, no argument provided for your option. Show this to the user.
+                            printf("[ERROR MESSAGE '%s']\n\t - PARSING ARGUMENTS - No argument provided by option '%s'!\n\n", program_invocation_short_name, builder->options[single_argument].long_flag); // An error has happened, no argument provided for your option. Show this to the user.
                             arguments_value = end_command_arguments; // Indicate the end of the collection.
                         }
                     }

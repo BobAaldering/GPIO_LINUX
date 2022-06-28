@@ -46,7 +46,7 @@ void argument_segment_display_general(parsed_collection_t *collection, has_parse
         // Check if the argument is within the range.
         if (specific_parsed_digit >= 0x0 && specific_parsed_digit <= 0xF) {
             shift_register_write_byte(specific_parsed_digit); // Show the digit on the seven segment display.
-            printf("[INFORMATION '%s']\n\t - OPTION DIGIT - Showed the hexadecimal number 0x%X on the segment display!\n", program_invocation_short_name, specific_parsed_digit); // Show a message to the user of the program.
+            printf("[INFORMATION '%s']\n\t - OPTION DIGIT - Showed the hexadecimal number 0x%X on the segment display!\n\n", program_invocation_short_name, specific_parsed_digit); // Show a message to the user of the program.
         }
         else
             printf("[ERROR MESSAGE '%s']\n\t - OPTION DIGIT - Hexadecimal number is too big!\n", program_invocation_short_name); // Error, the hexadecimal number is too big to show it on the seven segment display.
@@ -64,14 +64,14 @@ void argument_segment_display_general(parsed_collection_t *collection, has_parse
             // Check if we have a delay option.
             if (existing_arguments->delay_option.has_argument) {
                 delay_time = *(int* ) collection->parsed_arguments_collection[existing_arguments->delay_option.number_in_collection].argument; // Cast your time to an integer.
-                printf("[INFORMATION '%s']\n\t - OPTION COUNT DOWN - Using a delay of 0x%X milliseconds between counting!\n", program_invocation_short_name, delay_time); // Message for the user.
+                printf("[INFORMATION '%s']\n\t - OPTION COUNT DOWN - Using a delay of 0x%X milliseconds between counting!\n\n", program_invocation_short_name, delay_time); // Message for the user.
             }
             else {
                 delay_time = DEFAULT_DELAY_TIME; // The '--wait' option was not provided, use a default delay time between counting.
-                printf("[INFORMATION '%s']\n\t - OPTION COUNT DOWN - Using a default delay of 0x%X milliseconds between counting (no '--wait' argument provided)!\n", program_invocation_short_name, delay_time); // Message to the user that no argument is provided.
+                printf("[INFORMATION '%s']\n\t - OPTION COUNT DOWN - Using a default delay of 0x%X milliseconds between counting (no '--wait' argument provided)!\n\n", program_invocation_short_name, delay_time); // Message to the user that no argument is provided.
             }
 
-            printf("[INFORMATION '%s']\n\t - OPTION COUNT DOWN - Counting down till '0x0' from value '0x%X'...\n", program_invocation_short_name, start_number); // Message of the current option and counting down.
+            printf("[INFORMATION '%s']\n\t - OPTION COUNT DOWN - Counting down till '0x0' from value '0x%X'...\n\n", program_invocation_short_name, start_number); // Message of the current option and counting down.
 
             // This is the actual counter.
             for (int current_digit = start_number; current_digit >= 0x0; current_digit--) {
@@ -80,7 +80,7 @@ void argument_segment_display_general(parsed_collection_t *collection, has_parse
             }
         }
         else
-            printf("[ERROR MESSAGE '%s']\n\t - OPTION COUNT DOWN - Hexadecimal number is too big!\n", program_invocation_short_name); // Error, the hexadecimal number is too big to show it on the seven segment display.
+            printf("[ERROR MESSAGE '%s']\n\t - OPTION COUNT DOWN - Hexadecimal number is too big!\n\n", program_invocation_short_name); // Error, the hexadecimal number is too big to show it on the seven segment display.
 
         strcpy(showed_option, collection->parsed_arguments_collection[existing_arguments->countdown_option.number_in_collection].long_flag); // Message for the user to get the current option.
     }
@@ -95,14 +95,14 @@ void argument_segment_display_general(parsed_collection_t *collection, has_parse
             // Check if we have a delay option.
             if (existing_arguments->delay_option.has_argument) {
                 delay_time = *(int* ) collection->parsed_arguments_collection[existing_arguments->delay_option.number_in_collection].argument; // Cast your time to an integer.
-                printf("[INFORMATION '%s']\n\t - OPTION COUNT UP - Using a delay of 0x%X milliseconds between counting!\n", program_invocation_short_name, delay_time); // Message for the user.
+                printf("[INFORMATION '%s']\n\t - OPTION COUNT UP - Using a delay of 0x%X milliseconds between counting!\n\n", program_invocation_short_name, delay_time); // Message for the user.
             }
             else {
                 delay_time = DEFAULT_DELAY_TIME; // The '--wait' option was not provided, use a default delay time between counting.
-                printf("[INFORMATION '%s']\n\t - OPTION COUNT UP - Using a default delay of 0x%X milliseconds between counting (no '--wait' argument provided)!\n", program_invocation_short_name, delay_time); // Message to the user that no argument is provided.
+                printf("[INFORMATION '%s']\n\t - OPTION COUNT UP - Using a default delay of 0x%X milliseconds between counting (no '--wait' argument provided)!\n\n", program_invocation_short_name, delay_time); // Message to the user that no argument is provided.
             }
 
-            printf("[INFORMATION '%s']\n\t - OPTION COUNT UP - Counting up till '0xF' from value '0x%X'...\n", program_invocation_short_name, start_number); // Message of the current option and counting down.
+            printf("[INFORMATION '%s']\n\t - OPTION COUNT UP - Counting up till '0xF' from value '0x%X'...\n\n", program_invocation_short_name, start_number); // Message of the current option and counting down.
 
             // This is the actual counter.
             for (int current_digit = start_number; current_digit <= 0xF; current_digit++) {
@@ -111,17 +111,17 @@ void argument_segment_display_general(parsed_collection_t *collection, has_parse
             }
         }
         else
-            printf("[ERROR MESSAGE '%s']\n\t - OPTION COUNT UP - Hexadecimal number is too big!\n", program_invocation_short_name); // Error, the hexadecimal number is too big to show it on the seven segment display.
+            printf("[ERROR MESSAGE '%s']\n\t - OPTION COUNT UP - Hexadecimal number is too big!\n\n", program_invocation_short_name); // Error, the hexadecimal number is too big to show it on the seven segment display.
 
         strcpy(showed_option, collection->parsed_arguments_collection[existing_arguments->countup_option.number_in_collection].long_flag); // Message for the user to get the current option.
     }
     else if (existing_arguments->delay_option.has_argument)
         // Only a '--wait' option is passed to the program.
-        printf("[ERROR MESSAGE '%s']\n\t - WAIT ARGUMENT - Only the '--wait' option is provided without the '--countup' of '--countdown' options!\n", program_invocation_short_name);
+        printf("[ERROR MESSAGE '%s']\n\t - WAIT ARGUMENT - Only the '--wait' option is provided without the '--countup' of '--countdown' options!\n\n", program_invocation_short_name);
 
     // Show to the user that we are quitting the 'most important' part of the application.
-    printf("\n[GENERAL INFORMATION '%s']\n\t"
-           " - QUITTING - Showed your specified option '%s' on the seven segment display! Call the program again to show other options.\n",
+    printf("[GENERAL INFORMATION '%s']\n\t"
+           " - QUITTING - Showed your specified option '%s' on the seven segment display! Call the program again to show other options.\n\n",
            program_invocation_short_name,
            showed_option);
 }
