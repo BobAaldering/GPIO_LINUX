@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.18) # The minimum CMake version used.
-project(GPIO_HEX_DRIVER) # Name of the current project.
+project(GPIO_HEX_DISPLAY) # Name of the current project.
 
-add_executable(GPIO_HEX_DRIVER) # Define a name for your executable.
+add_executable(GPIO_HEX_DISPLAY) # Define a name for your executable.
 
-set(target GPIO_HEX_DRIVER) # Create a name for your target.
+set(target GPIO_HEX_DISPLAY) # Create a name for your target.
 
 set(USE_WIRINGPI ON CACHE BOOL "Variable to indicate using WiringPi for driving the seven segment display.")
-target_compile_definitions(GPIO_HEX_DRIVER PRIVATE WIRINGPI_SETUP ${USE_WIRINGPI})
+target_compile_definitions(GPIO_HEX_DISPLAY PRIVATE WIRINGPI_SETUP ${USE_WIRINGPI})
 
 # Here, you can add the files you want to add to your executable.
 target_sources(${target}
@@ -21,7 +21,7 @@ target_sources(${target}
 include_directories(./inc) # Instruct the compiler where to look for the given header files within this project.
 
 find_library(WIRINGPI_LIBRARIES NAMES wiringPi) # Find the 'WiringPi' package. For CLion, also see: https://youtrack.jetbrains.com/issue/CPP-17322/CLion-doesnt-find-implementations-but-code-compiles-and-executes-fine
-target_link_libraries(GPIO_HEX_DRIVER ${WIRINGPI_LIBRARIES} -lbcm2835) # Link against libraries.
+target_link_libraries(GPIO_HEX_DISPLAY ${WIRINGPI_LIBRARIES} -lbcm2835) # Link against libraries.
 
 target_compile_features(${target} PRIVATE c_std_11) # We are using the C11 language standards.
 set_target_properties(${target} PROPERTIES C_EXTENSIONS OFF) # Turn off compiler specific language extensions.
