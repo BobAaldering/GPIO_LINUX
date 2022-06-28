@@ -43,13 +43,13 @@ void shift_register_initialize() {
     if (wiringPiSetup() == -1)
         printf("[ERROR MESSAGE '%s']\n\t - WIRINGPI - An error has happened in the WiringPi setup!\n\n", program_invocation_short_name); // Error message.
     else
-        printf("[INFORMATION '%s']\n\t - GPIO DRIVER - The program uses WiringPi for GPIO!\n\n", program_invocation_short_name);
+        printf("[GENERAL INFORMATION '%s']\n\t - GPIO DRIVER - The program uses WiringPi for GPIO!\n\n", program_invocation_short_name);
 #else
     // Set up BCM2835, check if initializing has succeeded.
     if (bcm2835_init() != 1)
         printf("[ERROR MESSAGE '%s']\n\t - BCM2835 - An error has happened in the BCM2835 setup!\n\n", program_invocation_short_name); // Error message.
     else
-        printf("[INFORMATION '%s']\n\t - GPIO DRIVER - The program uses BCM2835 for GPIO!\n\n", program_invocation_short_name);
+        printf("[GENERAL INFORMATION '%s']\n\t - GPIO DRIVER - The program uses BCM2835 for GPIO!\n\n", program_invocation_short_name);
 #endif
 }
 
