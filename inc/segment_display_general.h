@@ -1,3 +1,7 @@
+//
+// Copyright © 2022 Bob Aaldering
+//
+
 #ifndef LED_DEVICE_DRIVER_SEGMENT_SHOWER_H
 #define LED_DEVICE_DRIVER_SEGMENT_SHOWER_H
 

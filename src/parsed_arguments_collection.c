@@ -1,3 +1,7 @@
+//
+// Copyright © 2022 Bob Aaldering
+//
+
 #include "parsed_arguments_collection.h"
 
 // This function initializes the data structure for parsed options.

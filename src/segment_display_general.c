@@ -1,3 +1,7 @@
+//
+// Copyright © 2022 Bob Aaldering
+//
+
 #include "segment_display_general.h"
 
 // This function initializes the seven segment display.

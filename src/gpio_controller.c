@@ -1,3 +1,7 @@
+//
+// Copyright © 2022 Bob Aaldering
+//
+
 #include "gpio_controller.h"
 
 // Function to write a value to a pin.

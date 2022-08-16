@@ -1,3 +1,7 @@
+//
+// Copyright © 2022 Bob Aaldering
+//
+
 #include "command_line_parser.h" // Include the 'command_line_parser.h' facilities.
 #include "parsed_arguments_collection.h" // Include the 'parsed_arguments_collection.h' facilities.
 #include "segment_display_general.h" // Include the 'segment_display_general.h' facilities.

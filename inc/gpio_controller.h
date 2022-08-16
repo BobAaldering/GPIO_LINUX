@@ -1,3 +1,7 @@
+//
+// Copyright © 2022 Bob Aaldering
+//
+
 #ifndef GPIO_HEX_DRIVER_GPIO_CONTROLLER_H
 #define GPIO_HEX_DRIVER_GPIO_CONTROLLER_H
 

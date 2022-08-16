@@ -1,3 +1,7 @@
+//
+// Copyright © 2022 Bob Aaldering
+//
+
 #ifndef LED_DEVICE_DRIVER_COMMAND_LINE_PARSER_H
 #define LED_DEVICE_DRIVER_COMMAND_LINE_PARSER_H
 

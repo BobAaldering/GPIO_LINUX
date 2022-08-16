@@ -1,3 +1,7 @@
+//
+// Copyright © 2022 Bob Aaldering
+//
+
 #include "command_line_parser.h"
 
 // This function initializes the command line builder (collection with the existing options).

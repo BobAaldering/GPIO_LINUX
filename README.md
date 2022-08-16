@@ -1,5 +1,7 @@
 # GPIO - Linux drivers
 
+_See the license of the code (copyright), please **do not** use the code for educational purposes._
+
 #### Study on operating systems, working with GPIO.
 
 This project contains the GPIO command where a seven segment display (in combination with a `74HC595` shift register) is controlled with a Raspberry Pi. Two different libraries are used, each of which implements GPIO. The first library is `WiringPi`, and was required to be user. The second library is `BCM2835`. I chose this one to use in a more generic way for the Raspberry Pi. The program can be compiled using `CMake`, an instruction is given below.
